@@ -1,9 +1,6 @@
 from Canvas import Canvas
 import random
 
-tasks = ["task "+str(i) for i in range(20)]
-values = [(random.randint(1,48),"\033["+str(random.randint(42,47))+str("m ")) for i in range(20)]
-
 class HorizontalBar:
     def __init__(self, x, tasks, values):
         self.x = x
@@ -26,6 +23,3 @@ class HorizontalBar:
                 self.canvas.putPoint(len(tasks[i])+1+x, i, v[1])
     def show_diagram(self):
         self.canvas.drawCanvas()
-hb = HorizontalBar(56, tasks, values)
-hb.update()
-hb.show_diagram()

@@ -1,0 +1,40 @@
+from Canvas import Canvas
+import random
+
+class HorizontalBar:
+    def __init__(self, x, labels, values, title, label_max_size=5):
+        self.x = x
+        self.labels = labels
+        self.values = values
+        self.title = title
+        self.y = len(self.labels)+3
+        self.canvas = Canvas(self.x, self.y)
+        self.label_max_size = label_max_size+1
+    def insert(self, task):
+        self.labels.append(task)
+    def add_value(self, value):
+        self.value=value
+    def update(self):
+        for i in range(len(self.labels)):
+            if i-3 == -3:
+                for j, c in enumerate(self.title):
+                    self.canvas.putPoint(j, 0, c)
+            if i-3 == -2:
+                for x in range(self.x):
+                    self.canvas.putPoint(x, 1, "-")
+            if i-3 == -1:
+                for x in range(self.x):
+                    self.canvas.putPoint(self.label_max_size+1, i+3, "|")
+            if i > -1:
+                for j, t in enumerate(self.labels):
+                    for c, k in enumerate(t):
+                        self.canvas.putPoint(c, i+3, k)
+                        self.canvas.putPoint(self.label_max_size+1, i+3,"|")
+                for x in range(len(self.values)-1):
+                    for x in range(self.values[i][0]):
+                        self.canvas.putPoint(self.label_max_size+2+x, i+3, self.values[i][1])
+    def show_diagram(self):
+        self.canvas.drawCanvas()
+hb = HorizontalBar(46, ["task1", "task10"], [(10, "\033[42m "), (20, "\033[43m ")], "Number of gold", 10)
+hb.update()
+hb.show_diagram()
